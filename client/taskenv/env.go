@@ -39,6 +39,9 @@ const (
 	// AllocID is the environment variable for passing the allocation ID.
 	AllocID = "NOMAD_ALLOC_ID"
 
+	// AllocIDShort is the environment variable for passing the allocation ID.
+	AllocIDShort = "NOMAD_ALLOC_ID_SHORT"
+
 	// AllocName is the environment variable for passing the allocation name.
 	AllocName = "NOMAD_ALLOC_NAME"
 
@@ -94,6 +97,8 @@ const (
 
 	// VaultNamespace is the environment variable for passing the Vault namespace, if applicable
 	VaultNamespace = "VAULT_NAMESPACE"
+
+	shortId = 8
 )
 
 // The node values that can be interpreted.
@@ -398,6 +403,7 @@ func (b *Builder) Build() *TaskEnv {
 	// Add the task metadata
 	if b.allocId != "" {
 		envMap[AllocID] = b.allocId
+		envMap[AllocIDShort] = b.allocId[:shortId]
 	}
 	if b.allocName != "" {
 		envMap[AllocName] = b.allocName
